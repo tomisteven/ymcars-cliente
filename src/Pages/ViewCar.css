@@ -1,0 +1,273 @@
+.cont-detalles-auto {
+  display: flex;
+
+  height: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+/* Estilos para el contenedor principal */
+.detalles-auto {
+  /* Para que se posicione encima de todo el contenido */
+  width: 50%; /* Ajustar el ancho según tus necesidades */
+  max-width: 1000px; /* Ancho máximo para pantallas grandes */
+  min-height: 500px; /* Altura mínima para que se vea el contenido */
+  background-color: #ffffff; /* Fondo blanco */
+  padding: 20px;
+
+
+  z-index: 1000; /* Asegurarse de que la ventana esté en la parte superior */
+  animation: fadeIn 0.5s ease-in-out; /* Animación de entrada */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Estilos para el título */
+.detalles-auto h2 {
+  font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
+  font-weight: bold;
+  color: #000000;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin-bottom: 20px;
+  text-align: center; /* Centrar el texto */
+  width: 100%; /* Ocupar el ancho completo del contenedor */
+}
+
+.detalles-auto h2 span {
+  font-size: 1.5rem; /* Aumentar el tamaño de la fuente */
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #454545;
+
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  text-align: center; /* Centrar el texto */
+  width: 100%; /* Ocupar el ancho completo del contenedor */
+}
+
+/* Estilos para los inputs */
+.detalles-auto input {
+  width: 100%; /* Ocupar el ancho completo del contenedor */
+  padding: 10px;
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 5px; /* Bordes redondeados */
+  margin-bottom: 15px;
+  font-size: 16px;
+  transition: border-color 0.3s ease; /* Animación de hover */
+}
+
+.detalles-auto input:focus {
+  border-color: #00b5bb; /* Color de borde azul al enfocar */
+  outline: none; /* Eliminar el borde nativo al enfocar */
+}
+
+/* Estilos para los párrafos con labels */
+.detalles-auto p {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%; /* Ocupar el ancho completo del contenedor */
+  display: flex; /* Disposición en línea para el label y el input */
+  align-items: center; /* Alinear verticalmente el label y el input */
+}
+
+.detalles-auto p b {
+  font-weight: bold;
+  margin-right: 10px; /* Espacio entre el label y el input */
+  width: 30%; /* Ancho fijo para el label */
+  text-align: left; /* Alinear el texto a la derecha */
+  position: relative;
+  top: -5px;
+  color: #000000;
+
+  padding-left: 5px;
+  padding-bottom: 12px;
+}
+
+/* Estilos para las acciones (botones) */
+.detalles-auto .acciones {
+  display: flex;
+  justify-content: space-around;
+  /* Distribuir los botones entre sí */
+  width: 100%; /* Ocupar el ancho completo del contenedor */
+  margin-top: 20px;
+  margin: 10px 0 0 0;
+}
+
+.btn-volver {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn-editar {
+  background-color: #00960a;
+  color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.detalles-auto .acciones button:hover {
+  background-color: #ffd427;
+  color: #000;
+}
+
+/* Estilos para la animación de salida (opcional) */
+.detalles-auto.detalles-auto-salir {
+  animation: fadeOut 0.5s ease-in-out;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Estilos para responsive (opcional) */
+@media (max-width: 768px) {
+  .detalles-auto {
+    width: 95%; /* Ocupar casi todo el ancho en pantallas pequeñas */
+  }
+
+  .detalles-auto input {
+    font-size: 14px;
+  }
+}
+
+.cont-historial-estados {
+  margin-bottom: 30px; /* Espacio debajo de la tabla */
+  margin-left: auto; /* Centrar la tabla horizontalmente */
+  margin-top: 25px; /* Espacio arriba de la tabla */
+    margin-right: auto; /* Centrar la tabla horizontalmente */
+  width: 40%; /* Ocupar el ancho completo del contenedor */
+}
+
+.cont-historial-estados h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000000;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.cont-historial-estados table {
+  width: 98%; /* Ocupar el ancho completo del contenedor */
+  border-collapse: collapse; /* Evitar bordes entre celdas */
+  margin: auto; /* Centrar la tabla horizontalmente */
+  margin-bottom: 50px; /* Espacio debajo de la tabla */
+}
+
+.cont-historial-estados th,
+.cont-historial-estados td {
+  padding: 10px;
+  border: 1px solid #000000;
+  text-align: left;
+}
+
+.cont-historial-estados th {
+  background-color: rgb(
+    135,
+    209,
+    255
+  ); /* Color de fondo gris claro para el encabezado */
+  font-weight: bold;
+}
+
+.cont-historial-estados tbody tr:nth-child(odd) {
+  background-color: #f9f9f9aa; /* Color de fondo alterno para las filas */
+}
+/* color para la ultima fila de la tabla */
+.activo {
+  background-color: rgb(0, 196, 127);
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 5px;
+}
+
+/* Colores para los estados (opcional) */
+.cont-historial-estados td .estado-pendiente {
+  background-color: #ffc107; /* Amarillo para "Pendiente" */
+}
+
+.cont-historial-estados td .estado-en-proceso {
+  background-color: #007bff; /* Azul para "En proceso" */
+}
+
+.cont-historial-estados td .estado-finalizado {
+  background-color: #28a745; /* Verde para "Finalizado" */
+}
+
+.cont-historial-estados td .estado-cancelado {
+  background-color: #dc3545; /* Rojo para "Cancelado" */
+}
+
+/* Estilos para responsive (opcional) */
+@media (max-width: 768px) {
+  .cont-historial-estados table {
+    font-size: 14px;
+  }
+}
+
+.cont-historial-estados b{
+    font-weight: bold;
+    margin-top: 50px;
+    color: #000000;
+
+    padding-left: 5px;
+    padding-bottom: 12px;
+
+}
+
+.cont-historial-estados input {
+  width: 90%; /* Ocupar el ancho completo del contenedor */
+  padding: 10px;
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 5px; /* Bordes redondeados */
+  margin-bottom: 15px;
+  margin-top: 15px;
+  font-size: 16px;
+  transition: border-color 0.3s ease; /* Animación de hover */
+}
+
+.btn-agregar-estado{
+    background-color: #d7a843;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}

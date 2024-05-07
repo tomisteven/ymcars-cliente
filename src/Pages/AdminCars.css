@@ -1,0 +1,174 @@
+.cont-headers-admincars{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 10px;
+
+}
+
+.cont-filters{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+}
+
+.cont-estadisticas{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-direction: column;
+    width: 20%;
+
+}
+.cont-header-acctions{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 20%;
+}
+
+.btn-agregar-auto{
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-eliminar-auto{
+    background-color: #f44336;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+
+.btn-eliminar-auto:hover{
+    background-color: #ebb400;
+    color: #000000;
+}
+
+.btn-agregar-auto:hover{
+    background-color: #ffd427;
+    color: #000;
+}
+
+.patente{
+    background-color: rgba(15, 230, 0, 0.486);
+    text-align: center;
+    border: 2px solid #000000;
+}
+
+.estado{
+    background-color: #9c79de;
+    text-align: center;
+
+}
+
+
+
+.titulo-lista-autos {
+  text-align: center;
+  font-size: 2rem;
+  color: #ffffff;
+}
+/* Style the entire component container */
+.autos-container {
+  display: flex;
+  flex-direction: column;
+  width: 99%;
+  margin: auto; /* Center the component horizontally */
+  padding: 1rem;
+}
+
+/* Style the heading */
+.autos-container h1 {
+  font-size: 1.5rem; /* Adjust font size as needed */
+  margin-bottom: 1rem;
+  color: black;
+}
+
+/* Style the search input */
+.autos-container input[type="text"] {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 40%; /* Stretch the input to full width */
+  margin: auto; /* Center the input horizontally */
+  margin-bottom: 1rem;
+}
+
+/* Style the table */
+.autos-container table {
+  border-collapse: collapse;
+  width: 99%;
+  margin: 0 auto; /* Center the table horizontally */
+  border: 1px solid #000000;
+}
+
+/* Style the table header */
+
+/* Style the table header cells */
+.autos-container table thead tr th {
+  padding: 0.5rem 1rem;
+  border: 2px solid #000000;
+  text-align: left;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: rgb(221, 144, 0);
+}
+
+/* Style the table body */
+.autos-container table tr:nth-child(odd) {
+  background-color: rgba(41, 111, 196, 0.837); /* Color de fondo para filas impares */
+}
+
+.autos-container table tr:nth-child(even) {
+  background-color: rgb(29, 92, 229); /* Color de fondo para filas pares */
+}
+
+/* Style the table body cells */
+.autos-container table tbody tr td {
+    font-size: 13px;
+  padding: 0.5rem 1rem;
+  color: #ffffff; /* White text color */
+  text-align: left; /* Align table cells to the left */
+  cursor: pointer; /* Add a pointer on hover */
+}
+
+/* Style the action buttons */
+.autos-container table tbody tr td button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 0.5rem; /* Add some spacing between buttons */
+}
+
+/* Style the "Ver" button */
+.autos-container table tbody tr td button:first-child {
+  background-color: #4caf50; /* Green color */
+  color: white;
+}
+
+/* Style the "Eliminar" button */
+.autos-container table tbody tr td button:nth-child(2) {
+  background-color: #f44336; /* Red color */
+  color: white;
+}
+
+/* Style the "Editar" button */
+.autos-container table tbody tr td button:last-child {
+  background-color: #007bff; /* Blue color */
+  color: white;
+}

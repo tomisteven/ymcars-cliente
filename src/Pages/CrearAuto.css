@@ -1,0 +1,96 @@
+.crear-auto {
+    width: 50%; /* Ajustar el ancho según sea necesario */
+    margin: 0 auto; /* Centrar en la página */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: sans-serif;
+    margin-bottom: 50px;
+  }
+
+  .crear-auto h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .crear-auto p {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .crear-auto b{
+    font-weight: bold;
+    width: 28%;
+    text-align: left;
+    position: relative;
+    top: 5px;
+  }
+
+  .crear-auto label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .crear-auto input[type="text"],
+  .crear-auto input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  .crear-auto .acciones {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .crear-auto button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .crear-auto button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Responsive (para pantallas pequeñas) */
+  @media (max-width: 768px) {
+    .crear-auto {
+      width: 95%;
+    }
+  }
+
+  .crear-auto input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  .crear-auto input[type="file"]::before {
+    content: "Seleccionar archivo";
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    background-color: #fff;
+    cursor: pointer;
+  }
+
+  .crear-auto input[type="file"]:hover::before {
+    background-color: #e9e9e9;
+  }
+
+  .crear-auto input[type="file"]::-webkit-file-upload-button {
+    display: none;
+  }
