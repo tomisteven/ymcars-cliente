@@ -1,0 +1,70 @@
+  /* const handleConfirmCreate = async () => {
+    setLoading(true);
+
+    // Validate newAuto object (optional)
+
+    // You can add validation logic here to ensure required fields exist
+    // and data is in the expected format.
+
+    const formData = new FormData();
+
+    // Handle PDF attachment
+    if (pdf) {
+      formData.append('factura', pdf, pdf.name); // Include filename
+    }
+
+    // Append other newAuto properties as form data
+    for (const key in nuevoAuto) {
+      if (key !== 'factura') { // Avoid duplicate factura
+        formData.append(key, nuevoAuto[key]);
+      }
+    }
+
+    try {
+      const response = await axios.post(API_CREAR_AUTO, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: 'token_ymcars_2024',
+        },
+      });
+
+      if (response.status === 200 && response.data.ok) {
+        toast.success("Auto creado exitosamente", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        autos.unshift(response.data.client); // Assuming 'client' is the new auto data
+        setModoCrear(false);
+      } else {
+        // Handle non-200 status codes or unsuccessful creation
+        console.error('Error creating auto:', response.status, response.data);
+        toast.error('Error al crear el auto', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      console.error('Error creating auto:', error);
+      toast.error('Error al crear el auto', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } finally {
+      setLoading(false); // Ensure loading state is reset even in case of errors
+    }
+  }; */

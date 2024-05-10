@@ -11,6 +11,8 @@ function DetallesAuto() {
   const { idAuto } = useParams(); // Obtener el ID del auto de los parámetros de la URL
   const [loadingE, setLoadingE] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState(null);
+  const [change, setChange] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -26,7 +28,7 @@ function DetallesAuto() {
         setAutoEditado(datos); // Inicializar el estado editado con los datos originales
         setLoading(false);
       });
-  }, [idAuto]);
+  }, [idAuto, change]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -95,6 +97,33 @@ function DetallesAuto() {
         setAuto(datosActualizados); // Actualizar el estado con los datos actualizados
         setAutoEditado(datosActualizados); // Restablecer el estado editado a los datos actualizados
         setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Error al actualizar el auto.");
+      });
+  };
+
+  const handleConfirmAddFile = async () => {
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("factura", file);
+    await fetch(`${API_AUTOS}/factura/${idAuto}`, {
+      method: "POST",
+      headers: {
+        Authorization: "token_ymcars_2024",
+      },
+      body: formData,
+    })
+      .then((respuesta) => respuesta.json())
+      .then((datosActualizados) => {
+        toast.success("Auto actualizado correctamente.", {
+          position: "top-right",
+          autoClose: 2000,
+          closeOnClick: true,
+          draggable: true,
+        });
+        setChange(!change);
       })
       .catch((error) => {
         console.error(error);
@@ -190,7 +219,7 @@ function DetallesAuto() {
           </button>
           <button
             className="btn-volver"
-            onClick={() => (window.location.href = "/admin/autos")}
+            onClick={() => (window.location.href = "/")}
           >
             Volver a la lista
           </button>
@@ -235,6 +264,32 @@ function DetallesAuto() {
           onClick={() => agregarNuevoEstado()}
         >
           {loadingE ? "Agregando..." : "Agregar"}
+        </button>
+
+        <h2>Documentos {auto.factura?.length} /2</h2>
+        <div class="facturas-cont">
+          {auto.factura?.map((factura, i) => (
+            <div class="factura">
+              <a href={factura.url} target="_blank" rel="noreferrer">
+                Ver factura {i + 1}
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <h2>Nueva Factura</h2>
+        <input
+          type="file"
+          name="factura"
+          onChange={(e) => {
+            setFile(e.target.files[0]);
+          }}
+        />
+        <button
+          onClick={() => handleConfirmAddFile()}
+          className="btn-agregar-factura"
+        >
+          {loading ? "Agregando..." : "Agregar"}
         </button>
       </div>
       <ToastContainer />

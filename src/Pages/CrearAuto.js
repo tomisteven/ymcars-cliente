@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./CrearAuto.css";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import request from "superagent";
+import { toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const API_CREAR_AUTO = "http://localhost:8080/admin/clientes/crear"; // Reemplazar con la URL de tu API
@@ -13,46 +14,108 @@ function CrearAuto({ setAutos, setModoCrear, autos }) {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setNuevoAuto({ ...nuevoAuto, [name]: value }); // Actualizar el estado editado con el nuevo valor
+    setNuevoAuto({ ...nuevoAuto, [name]: value.toUpperCase() }); // Actualizar el estado editado con el nuevo valor
   };
 
   const handleConfirmCreate = async () => {
     setLoading(true);
+
+    pdf.size > 2048576 && alert("El archivo es demasiado grande")
+
     const newAuto = {
       ...nuevoAuto,
       factura: pdf,
     };
 
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: "token_ymcars_2024",
-      },
-    };
+    const formData = new FormData();
+    for (const key in newAuto) {
+      formData.append(key, newAuto[key]);
+    }
+
     try {
-      const res = await axios.post(API_CREAR_AUTO, newAuto, config);
-      if (res.data.ok) {
-        toast.success("Auto creado exitosamente", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        autos.unshift(res.data.client);
-        setModoCrear(false);
-        setLoading(false);
+      // Intenta con Axios
+      const axiosResponse = await axios.post(API_CREAR_AUTO, formData, {
+        headers: {
+          Authorization: "token_ymcars_2024",
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(axiosResponse);
+      if (axiosResponse.data.ok) {
+        handleSuccess(axiosResponse.data.client);
       }
-    } catch (error) {
-      console.error(error);
+    } catch (axiosError) {
+      console.error("Error con Axios:", axiosError);
+      // Si Axios falla, intenta con Fetch
+      try {
+        const fetchResponse = await fetch(API_CREAR_AUTO, {
+          method: "POST",
+          headers: {
+            Authorization: "token_ymcars_2024",
+          },
+          body: formData,
+        });
+        if (fetchResponse.ok) {
+          const responseData = await fetchResponse.json();
+          if (responseData.ok) {
+            handleSuccess(responseData.client);
+            return; // Evita continuar con Superagent si Fetch tiene éxito
+          }
+        }
+      } catch (fetchError) {
+        console.error("Error con Fetch:", fetchError);
+      }
+      // Si Fetch también falla, intenta con Superagent
+      try {
+        const superagentResponse = await request
+          .post(API_CREAR_AUTO)
+          .set("Authorization", "token_ymcars_2024")
+          .send(formData);
+
+        if (superagentResponse.body.ok) {
+          handleSuccess(superagentResponse.body.client);
+          return; // Evita continuar si Superagent tiene éxito
+        }
+      } catch (superagentError) {
+        console.error("Error con Superagent:", superagentError);
+      }
+      // Si todos los métodos fallan, muestra un mensaje de error
+      handleError();
+    } finally {
+      setLoading(false);
     }
   };
 
-  const saveImages = (name, file) => {
-    setPdf(file);
+  const handleSuccess = (client) => {
+    toast.success("Auto creado exitosamente", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    autos.unshift(client);
+    setModoCrear(false);
   };
+
+  const handleError = () => {
+    toast.error("Error al crear el auto. Por favor, inténtalo de nuevo.", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
+
+  /* const saveImages = (name, file) => {
+    setPdf(file);
+  }; */
 
   return (
     <div className="crear-auto">
@@ -141,12 +204,15 @@ function CrearAuto({ setAutos, setModoCrear, autos }) {
       <p>
         <b>Factura (PDF):</b>
         <input
+          size="2048576"
           type="file"
           id="factura"
           name="factura"
           onChange={(event) => {
-            setPdf(event.target.files[0]);
-            saveImages("factura", event.target.files[0]);
+            event.target.files[0].size > 2048576
+              ? alert("El archivo es demasiado grande, seleccione OTRO archivo PDF de menos de 2MB")
+              : setPdf(event.target.files[0]);
+
           }}
           accept=".pdf"
           required
@@ -157,7 +223,7 @@ function CrearAuto({ setAutos, setModoCrear, autos }) {
           {loading ? "Creando..." : "Crear"}
         </button>
       </div>
-      <ToastContainer />
+
     </div>
   );
 }

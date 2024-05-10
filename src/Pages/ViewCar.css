@@ -1,13 +1,6 @@
 .cont-detalles-auto {
   display: flex;
-
-  height: 100vh;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  height: auto;
   z-index: 1000;
 }
 
@@ -19,7 +12,6 @@
   min-height: 500px; /* Altura mínima para que se vea el contenido */
   background-color: #ffffff; /* Fondo blanco */
   padding: 20px;
-
 
   z-index: 1000; /* Asegurarse de que la ventana esté en la parte superior */
   animation: fadeIn 0.5s ease-in-out; /* Animación de entrada */
@@ -165,8 +157,9 @@
   margin-bottom: 30px; /* Espacio debajo de la tabla */
   margin-left: auto; /* Centrar la tabla horizontalmente */
   margin-top: 25px; /* Espacio arriba de la tabla */
-    margin-right: auto; /* Centrar la tabla horizontalmente */
+  margin-right: auto; /* Centrar la tabla horizontalmente */
   width: 40%; /* Ocupar el ancho completo del contenedor */
+  height: auto;
 }
 
 .cont-historial-estados h2 {
@@ -194,8 +187,8 @@
 
 .cont-historial-estados th {
   background-color: rgb(
-    135,
-    209,
+    214,
+    239,
     255
   ); /* Color de fondo gris claro para el encabezado */
   font-weight: bold;
@@ -241,14 +234,13 @@
   }
 }
 
-.cont-historial-estados b{
-    font-weight: bold;
-    margin-top: 50px;
-    color: #000000;
+.cont-historial-estados b {
+  font-weight: bold;
+  margin-top: 50px;
+  color: #000000;
 
-    padding-left: 5px;
-    padding-bottom: 12px;
-
+  padding-left: 5px;
+  padding-bottom: 12px;
 }
 
 .cont-historial-estados input {
@@ -262,12 +254,45 @@
   transition: border-color 0.3s ease; /* Animación de hover */
 }
 
-.btn-agregar-estado{
-    background-color: #d7a843;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.btn-agregar-estado {
+  background-color: #d7a843;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* facturas */
+.facturas-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.factura {
+  width: 40%;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: rgb(209, 159, 92);
+  color: hsl(0, 0%, 80%);
+}
+.factura a {
+  color: hsl(0, 0%, 100%);
+  text-decoration: none;
+}
+
+.btn-agregar-factura {
+  background-color: #43d76f;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./AdminCars.css";
 import { Dropdown, DropdownMenu } from "semantic-ui-react";
 import CrearAuto from "./CrearAuto.js";
+import { ToastContainer, toast } from "react-toastify";
 
 const API_AUTOS = "http://localhost:8080/admin/clientes"; // Reemplazar con la URL de tu API
 
@@ -78,6 +79,7 @@ function AdminCars() {
         .then((respuesta) => respuesta.json())
         .then(() => {
           setAutos(autos.filter((auto) => auto._id !== idAuto));
+          toast.success("Auto eliminado permanentemente");
         });
     }
   };
@@ -109,6 +111,9 @@ function AdminCars() {
     <div className="autos-container">
       <div className="cont-headers-admincars">
         <div class="cont-header-acctions">
+        <button className="btn-recargar-auto" onClick={() => window.location.reload()}>
+            Recargar Pagina
+          </button>
           <button className="btn-agregar-auto" onClick={() => handleCrear()}>
             Agregar
           </button>
@@ -186,8 +191,8 @@ function AdminCars() {
                 <td>{auto.modelo}</td>
                 <td>{auto.aseguradora}</td>
                 <td>{auto.numeroSiniestro}</td>
-                <td>{auto.codigoColor}</td>
-                <td>{auto.fechaIngreso}</td>
+                <td>{auto.codigoColor ? auto.codigoColor : "No especifica" }</td>
+                <td>{auto.fechaIngreso ? auto.fechaIngreso : "No especifica"}</td>
                 <td className="estado">{auto.estadoActual}</td>
                 <td>
                   <Dropdown text="Opciones">
@@ -249,6 +254,7 @@ function AdminCars() {
           <button onClick={() => handleCerrarDetalles(idAuto)}>Cerrar</button>
         </div>
       ))}
+      <ToastContainer />
     </div>
   );
 }

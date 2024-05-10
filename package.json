@@ -17,6 +17,7 @@
     "react-toastify": "^10.0.5",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.5",
+    "superagent": "^9.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -42,5 +43,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "homepage": "https://663c525e748bdc593f3c1f03--precious-malabi-c88500.netlify.app/"
 }
