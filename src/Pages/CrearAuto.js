@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import "./CrearAuto.css";
 import axios from "axios";
 import request from "superagent";
-import { toast} from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Icon, Label } from "semantic-ui-react";
 
 const API_CREAR_AUTO = "http://localhost:8080/admin/clientes/crear"; // Reemplazar con la URL de tu API
 
 function CrearAuto({ setAutos, setModoCrear, autos }) {
   const [nuevoAuto, setNuevoAuto] = useState({}); // Estado para almacenar los cambios realizados
+  const [nuevoDaño, setNuevoDaño] = useState("");
+  const [daniosRecibidos, setDaños] = useState([]);
   const [pdf, setPdf] = useState(null); // Estado para almacenar el archivo PDF
   const [loading, setLoading] = useState(false); // Estado para indicar si se está cargando la información
 
@@ -20,17 +23,30 @@ function CrearAuto({ setAutos, setModoCrear, autos }) {
   const handleConfirmCreate = async () => {
     setLoading(true);
 
-    pdf.size > 2048576 && alert("El archivo es demasiado grande")
+    if (pdf) {
+      pdf.size > 2048576 && alert("El archivo es demasiado grande");
+    }
 
-    const newAuto = {
-      ...nuevoAuto,
-      factura: pdf,
-    };
+    let newAuto = {};
+
+    if (pdf) {
+      newAuto = {
+        ...nuevoAuto,
+        factura: pdf,
+      };
+    } else {
+      newAuto = {
+        ...nuevoAuto,
+      };
+    }
 
     const formData = new FormData();
     for (const key in newAuto) {
       formData.append(key, newAuto[key]);
     }
+
+    // Agregar el array de daños como un string JSON
+    formData.append("daniosRecibidos", JSON.stringify(daniosRecibidos));
 
     try {
       // Intenta con Axios
@@ -86,6 +102,18 @@ function CrearAuto({ setAutos, setModoCrear, autos }) {
     }
   };
 
+  const handleInputChangeDaño = (event) => {
+    setNuevoDaño(event.target.value);
+  };
+
+  const agregarDaño = () => {
+    if (nuevoDaño.trim()) {
+      setDaños([...daniosRecibidos, { descripcion: nuevoDaño }]);
+      setNuevoDaño("");
+      console.log(daniosRecibidos);
+    }
+  };
+
   const handleSuccess = (client) => {
     toast.success("Auto creado exitosamente", {
       position: "top-right",
@@ -111,11 +139,6 @@ function CrearAuto({ setAutos, setModoCrear, autos }) {
       progress: undefined,
     });
   };
-
-
-  /* const saveImages = (name, file) => {
-    setPdf(file);
-  }; */
 
   return (
     <div className="crear-auto">
@@ -202,6 +225,35 @@ function CrearAuto({ setAutos, setModoCrear, autos }) {
         />
       </p>
       <p>
+        <b>Llego con estos daños:</b>
+        <input
+          type="text"
+          name="daño"
+          value={nuevoDaño}
+          onChange={handleInputChangeDaño}
+        />
+        <button onClick={agregarDaño}>Agregar</button>
+      </p>
+      <p>
+        <b>Daños:</b>
+        <ul className="ul-daños-item">
+          {daniosRecibidos &&
+            daniosRecibidos.map((daño, index) => (
+              <Label size="large" className="item-daño">
+                {daño.descripcion}
+                <Icon
+                  name="delete"
+                  color="red"
+                  onClick={() => {
+                    daniosRecibidos.splice(index, 1);
+                    setDaños([...daniosRecibidos]);
+                  }}
+                />
+              </Label>
+            ))}
+        </ul>
+      </p>
+      <p>
         <b>Factura (PDF):</b>
         <input
           size="2048576"
@@ -210,9 +262,10 @@ function CrearAuto({ setAutos, setModoCrear, autos }) {
           name="factura"
           onChange={(event) => {
             event.target.files[0].size > 2048576
-              ? alert("El archivo es demasiado grande, seleccione OTRO archivo PDF de menos de 2MB")
+              ? alert(
+                  "El archivo es demasiado grande, seleccione OTRO archivo PDF de menos de 2MB"
+                )
               : setPdf(event.target.files[0]);
-
           }}
           accept=".pdf"
           required
@@ -223,7 +276,6 @@ function CrearAuto({ setAutos, setModoCrear, autos }) {
           {loading ? "Creando..." : "Crear"}
         </button>
       </div>
-
     </div>
   );
 }

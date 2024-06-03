@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; // Importar useParams y useNavigate para obtener el ID del auto y navegar
 import "./ViewCar.css";
 import { ToastContainer, toast } from "react-toastify";
+import { Label, Icon } from "semantic-ui-react";
 
 const API_AUTOS = "http://localhost:8080/admin/clientes/"; // Reemplazar con la URL de tu API
 
@@ -131,6 +132,32 @@ function DetallesAuto() {
       });
   };
 
+  const deleteDanio = async (daño) => {
+    setLoading(true);
+    await fetch(`${API_AUTOS}danio/${idAuto}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "token_ymcars_2024",
+      },
+      body: JSON.stringify({danioId: daño._id}),
+    })
+      .then((respuesta) => respuesta.json())
+      .then((datosActualizados) => {
+        toast.success("Auto actualizado correctamente.", {
+          position: "top-right",
+          autoClose: 2000,
+          closeOnClick: true,
+          draggable: true,
+        });
+        setChange(!change);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Error al actualizar el auto.");
+      });
+  }
+
   if (!auto) {
     return <div>Cargando...</div>;
   }
@@ -226,6 +253,23 @@ function DetallesAuto() {
         </div>
       </div>
       <div class="cont-historial-estados">
+        <div class="danios">
+          <h2>Daños Cuando Recibieron el auto:</h2>
+          <ul>
+            {auto.daniosRecibidos?.map((daño) => (
+              <Label  size="large" className="item-daño" >
+                {daño.descripcion}
+                <Icon
+                  name="delete"
+                  color="red"
+                  onClick={() => {
+                    deleteDanio(daño);
+                  }}
+                />
+              </Label>
+            ))}
+          </ul>
+        </div>
         <h2>Historial de Estados</h2>
         <table>
           <thead>
@@ -253,7 +297,7 @@ function DetallesAuto() {
         </table>
 
         <b>Agregar Nuevo Estado del auto:</b>
-        <input
+        <textarea
           type="text"
           name="nuevoEstado"
           value={autoEditado.nuevoEstado}
@@ -292,6 +336,7 @@ function DetallesAuto() {
           {loading ? "Agregando..." : "Agregar"}
         </button>
       </div>
+
       <ToastContainer />
     </div>
   );

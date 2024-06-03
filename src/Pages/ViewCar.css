@@ -63,6 +63,17 @@
   transition: border-color 0.3s ease; /* Animación de hover */
 }
 
+.cont-historial-estados textarea{
+  width: 100%; /* Ocupar el ancho completo del contenedor */
+  padding: 10px;
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 5px; /* Bordes redondeados */
+  margin-bottom: 15px;
+  font-size: 16px;
+  transition: border-color 0.3s ease; /* Animación de hover */
+
+}
+
 .detalles-auto input:focus {
   border-color: #00b5bb; /* Color de borde azul al enfocar */
   outline: none; /* Eliminar el borde nativo al enfocar */

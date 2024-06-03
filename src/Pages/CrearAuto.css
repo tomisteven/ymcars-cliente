@@ -1,3 +1,20 @@
+.ul-daños-item{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 20px;
+    width: 100%;
+}
+
+
+.li-cont-item{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    align-self: center;
+    text-align: center;
+}
+
 .crear-auto {
     width: 50%; /* Ajustar el ancho según sea necesario */
     margin: 0 auto; /* Centrar en la página */
